@@ -30,6 +30,10 @@ jobs:
       - name: Build APK
         run: gradle assembleDebug
 
+- name: Check APK
+  run: |
+    ls -R app/build/outputs
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
