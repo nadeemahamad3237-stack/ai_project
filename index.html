@@ -9,35 +9,39 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>AI_Project - Calculator App</h1>
-    </header>
-    <main>
+    <div class="container">
         <div class="calculator">
             <input type="text" id="display" disabled>
-            <div class="buttons">
-                <button class="btn" onclick="clearDisplay()">C</button>
-                <button class="btn" onclick="deleteLastChar()">DEL</button>
-                <button class="btn" onclick="addValue('%')">%</button>
-                <button class="btn operator" onclick="addValue('/')">/</button>
-                <button class="btn" onclick="addValue('7')">7</button>
-                <button class="btn" onclick="addValue('8')">8</button>
-                <button class="btn" onclick="addValue('9')">9</button>
-                <button class="btn operator" onclick="addValue('*')">*</button>
-                <button class="btn" onclick="addValue('4')">4</button>
-                <button class="btn" onclick="addValue('5')">5</button>
-                <button class="btn" onclick="addValue('6')">6</button>
-                <button class="btn operator" onclick="addValue('-')">-</button>
-                <button class="btn" onclick="addValue('1')">1</button>
-                <button class="btn" onclick="addValue('2')">2</button>
-                <button class="btn" onclick="addValue('3')">3</button>
-                <button class="btn operator" onclick="addValue('+')">+</button>
-                <button class="btn zero" onclick="addValue('0')">0</button>
-                <button class="btn" onclick="addValue('.')">.</button>
-                <button class="btn operator equal" onclick="calculate()">=</button>
+            <div class="button-row">
+                <button id="clear" onclick="clearDisplay()">C</button>
+                <button id="backspace" onclick="backspace()">⌫</button>
+            </div>
+            <div class="button-row">
+                <button id="7" onclick="appendNumber(7)">7</button>
+                <button id="8" onclick="appendNumber(8)">8</button>
+                <button id="9" onclick="appendNumber(9)">9</button>
+                <button id="divide" onclick="appendOperator('/')">/</button>
+            </div>
+            <div class="button-row">
+                <button id="4" onclick="appendNumber(4)">4</button>
+                <button id="5" onclick="appendNumber(5)">5</button>
+                <button id="6" onclick="appendNumber(6)">6</button>
+                <button id="multiply" onclick="appendOperator('*')">*</button>
+            </div>
+            <div class="button-row">
+                <button id="1" onclick="appendNumber(1)">1</button>
+                <button id="2" onclick="appendNumber(2)">2</button>
+                <button id="3" onclick="appendNumber(3)">3</button>
+                <button id="subtract" onclick="appendOperator('-')">-</button>
+            </div>
+            <div class="button-row">
+                <button id="0" onclick="appendNumber(0)">0</button>
+                <button id="decimal" onclick="appendDecimal()">.</button>
+                <button id="equals" onclick="calculate()">=</button>
+                <button id="add" onclick="appendOperator('+')">+</button>
             </div>
         </div>
-    </main>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>

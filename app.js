@@ -1,67 +1,67 @@
 ```javascript
-let display = document.getElementById('display');
-
-let currentValue = '';
-let previousValue = '';
+let currentNumber = '';
+let previousNumber = '';
 let operator = '';
 
-function addValue(val) {
-    currentValue += val;
-    display.value = currentValue;
+function appendNumber(number) {
+    currentNumber += number.toString();
+    updateDisplay();
+}
+
+function appendOperator(op) {
+    previousNumber = currentNumber;
+    currentNumber = '';
+    operator = op;
+    updateDisplay();
+}
+
+function appendDecimal() {
+    if (!currentNumber.includes('.')) {
+        currentNumber += '.';
+        updateDisplay();
+    }
 }
 
 function clearDisplay() {
-    currentValue = '';
-    previousValue = '';
+    currentNumber = '';
+    previousNumber = '';
     operator = '';
-    display.value = '';
+    updateDisplay();
 }
 
-function deleteLastChar() {
-    currentValue = currentValue.slice(0, -1);
-    display.value = currentValue;
+function backspace() {
+    currentNumber = currentNumber.slice(0, -1);
+    updateDisplay();
 }
 
 function calculate() {
-    if (currentValue !== '' && operator !== '') {
+    if (previousNumber !== '' && currentNumber !== '') {
         let result;
         switch (operator) {
             case '+':
-                result = parseFloat(previousValue) + parseFloat(currentValue);
+                result = parseFloat(previousNumber) + parseFloat(currentNumber);
                 break;
             case '-':
-                result = parseFloat(previousValue) - parseFloat(currentValue);
+                result = parseFloat(previousNumber) - parseFloat(currentNumber);
                 break;
             case '*':
-                result = parseFloat(previousValue) * parseFloat(currentValue);
+                result = parseFloat(previousNumber) * parseFloat(currentNumber);
                 break;
             case '/':
-                result = parseFloat(previousValue) / parseFloat(currentValue);
-                break;
-            case '%':
-                result = (parseFloat(previousValue) / 100) * parseFloat(currentValue);
+                result = parseFloat(previousNumber) / parseFloat(currentNumber);
                 break;
             default:
-                return;
+                result = 0;
         }
-        display.value = result;
-        previousValue = result.toString();
-        currentValue = '';
+        currentNumber = result.toString();
+        previousNumber = '';
         operator = '';
+        updateDisplay();
     }
 }
 
-function setOperator(op) {
-    if (currentValue !== '') {
-        previousValue = currentValue;
-        operator = op;
-        currentValue = '';
-    }
+function updateDisplay() {
+    document.getElementById('display').value = currentNumber;
 }
-
-document.querySelectorAll('.operator').forEach(button => {
-    button.addEventListener('click', () => {
-        setOperator(button.textContent);
-    });
-});
 ```
+This code creates a basic calculator application with a simple and intuitive interface. It supports basic arithmetic operations like addition, subtraction, multiplication, and division, as well as decimal numbers. The `app.js` file handles all the logic, and the `style.css` file provides a clean and responsive design. The `index.html` file defines the structure of the application.

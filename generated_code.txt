@@ -10,35 +10,39 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>AI_Project - Calculator App</h1>
-    </header>
-    <main>
+    <div class="container">
         <div class="calculator">
             <input type="text" id="display" disabled>
-            <div class="buttons">
-                <button class="btn" onclick="clearDisplay()">C</button>
-                <button class="btn" onclick="deleteLastChar()">DEL</button>
-                <button class="btn" onclick="addValue('%')">%</button>
-                <button class="btn operator" onclick="addValue('/')">/</button>
-                <button class="btn" onclick="addValue('7')">7</button>
-                <button class="btn" onclick="addValue('8')">8</button>
-                <button class="btn" onclick="addValue('9')">9</button>
-                <button class="btn operator" onclick="addValue('*')">*</button>
-                <button class="btn" onclick="addValue('4')">4</button>
-                <button class="btn" onclick="addValue('5')">5</button>
-                <button class="btn" onclick="addValue('6')">6</button>
-                <button class="btn operator" onclick="addValue('-')">-</button>
-                <button class="btn" onclick="addValue('1')">1</button>
-                <button class="btn" onclick="addValue('2')">2</button>
-                <button class="btn" onclick="addValue('3')">3</button>
-                <button class="btn operator" onclick="addValue('+')">+</button>
-                <button class="btn zero" onclick="addValue('0')">0</button>
-                <button class="btn" onclick="addValue('.')">.</button>
-                <button class="btn operator equal" onclick="calculate()">=</button>
+            <div class="button-row">
+                <button id="clear" onclick="clearDisplay()">C</button>
+                <button id="backspace" onclick="backspace()">⌫</button>
+            </div>
+            <div class="button-row">
+                <button id="7" onclick="appendNumber(7)">7</button>
+                <button id="8" onclick="appendNumber(8)">8</button>
+                <button id="9" onclick="appendNumber(9)">9</button>
+                <button id="divide" onclick="appendOperator('/')">/</button>
+            </div>
+            <div class="button-row">
+                <button id="4" onclick="appendNumber(4)">4</button>
+                <button id="5" onclick="appendNumber(5)">5</button>
+                <button id="6" onclick="appendNumber(6)">6</button>
+                <button id="multiply" onclick="appendOperator('*')">*</button>
+            </div>
+            <div class="button-row">
+                <button id="1" onclick="appendNumber(1)">1</button>
+                <button id="2" onclick="appendNumber(2)">2</button>
+                <button id="3" onclick="appendNumber(3)">3</button>
+                <button id="subtract" onclick="appendOperator('-')">-</button>
+            </div>
+            <div class="button-row">
+                <button id="0" onclick="appendNumber(0)">0</button>
+                <button id="decimal" onclick="appendDecimal()">.</button>
+                <button id="equals" onclick="calculate()">=</button>
+                <button id="add" onclick="appendOperator('+')">+</button>
             </div>
         </div>
-    </main>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
@@ -48,157 +52,140 @@
 ```css
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
     background-color: #f0f0f0;
 }
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-.calculator {
-    width: 300px;
-    margin: 20px auto;
-    padding: 20px;
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin: 40px auto;
     background-color: #fff;
+    padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.calculator {
+    width: 100%;
+    padding: 20px;
+}
+
 #display {
     width: 100%;
     height: 40px;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: right;
     padding: 10px;
+    font-size: 24px;
+    text-align: right;
     border: none;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #f0f0f0;
 }
 
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
-    margin-top: 20px;
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
-.btn {
+button {
+    width: 23%;
     height: 40px;
     font-size: 18px;
-    font-weight: bold;
     border: none;
     border-radius: 10px;
-    background-color: #4CAF50;
-    color: #fff;
+    background-color: #fff;
     cursor: pointer;
 }
 
-.btn:hover {
+button:hover {
+    background-color: #f0f0f0;
+}
+
+#clear, #backspace {
+    background-color: #ff9999;
+    color: #fff;
+}
+
+#clear:hover, #backspace:hover {
+    background-color: #ff6666;
+}
+
+#equals {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+#equals:hover {
     background-color: #3e8e41;
-}
-
-.operator {
-    background-color: #03A9F4;
-}
-
-.operator:hover {
-    background-color: #0371b3;
-}
-
-.zero {
-    grid-column: 1 / 3;
-}
-
-.equal {
-    grid-column: 3 / 5;
-    background-color: #FF9800;
-}
-
-.equal:hover {
-    background-color: #ff7f00;
-}
-
-@media only screen and (max-width: 600px) {
-    .calculator {
-        width: 90%;
-        margin: 20px auto;
-    }
 }
 ```
 
 ### app.js
 ```javascript
-let display = document.getElementById('display');
-
-let currentValue = '';
-let previousValue = '';
+let currentNumber = '';
+let previousNumber = '';
 let operator = '';
 
-function addValue(val) {
-    currentValue += val;
-    display.value = currentValue;
+function appendNumber(number) {
+    currentNumber += number.toString();
+    updateDisplay();
+}
+
+function appendOperator(op) {
+    previousNumber = currentNumber;
+    currentNumber = '';
+    operator = op;
+    updateDisplay();
+}
+
+function appendDecimal() {
+    if (!currentNumber.includes('.')) {
+        currentNumber += '.';
+        updateDisplay();
+    }
 }
 
 function clearDisplay() {
-    currentValue = '';
-    previousValue = '';
+    currentNumber = '';
+    previousNumber = '';
     operator = '';
-    display.value = '';
+    updateDisplay();
 }
 
-function deleteLastChar() {
-    currentValue = currentValue.slice(0, -1);
-    display.value = currentValue;
+function backspace() {
+    currentNumber = currentNumber.slice(0, -1);
+    updateDisplay();
 }
 
 function calculate() {
-    if (currentValue !== '' && operator !== '') {
+    if (previousNumber !== '' && currentNumber !== '') {
         let result;
         switch (operator) {
             case '+':
-                result = parseFloat(previousValue) + parseFloat(currentValue);
+                result = parseFloat(previousNumber) + parseFloat(currentNumber);
                 break;
             case '-':
-                result = parseFloat(previousValue) - parseFloat(currentValue);
+                result = parseFloat(previousNumber) - parseFloat(currentNumber);
                 break;
             case '*':
-                result = parseFloat(previousValue) * parseFloat(currentValue);
+                result = parseFloat(previousNumber) * parseFloat(currentNumber);
                 break;
             case '/':
-                result = parseFloat(previousValue) / parseFloat(currentValue);
-                break;
-            case '%':
-                result = (parseFloat(previousValue) / 100) * parseFloat(currentValue);
+                result = parseFloat(previousNumber) / parseFloat(currentNumber);
                 break;
             default:
-                return;
+                result = 0;
         }
-        display.value = result;
-        previousValue = result.toString();
-        currentValue = '';
+        currentNumber = result.toString();
+        previousNumber = '';
         operator = '';
+        updateDisplay();
     }
 }
 
-function setOperator(op) {
-    if (currentValue !== '') {
-        previousValue = currentValue;
-        operator = op;
-        currentValue = '';
-    }
+function updateDisplay() {
+    document.getElementById('display').value = currentNumber;
 }
-
-document.querySelectorAll('.operator').forEach(button => {
-    button.addEventListener('click', () => {
-        setOperator(button.textContent);
-    });
-});
 ```
+This code creates a basic calculator application with a simple and intuitive interface. It supports basic arithmetic operations like addition, subtraction, multiplication, and division, as well as decimal numbers. The `app.js` file handles all the logic, and the `style.css` file provides a clean and responsive design. The `index.html` file defines the structure of the application.
