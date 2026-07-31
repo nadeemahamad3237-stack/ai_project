@@ -3,45 +3,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI_Project - Calculator App</title>
+    <title>AI_Project</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <header>
+        <h1>AI_Project Calculator</h1>
+    </header>
+    <main>
         <div class="calculator">
             <input type="text" id="display" disabled>
-            <div class="button-row">
-                <button id="clear" onclick="clearDisplay()">C</button>
-                <button id="backspace" onclick="backspace()">⌫</button>
-            </div>
-            <div class="button-row">
-                <button id="7" onclick="appendNumber(7)">7</button>
-                <button id="8" onclick="appendNumber(8)">8</button>
-                <button id="9" onclick="appendNumber(9)">9</button>
-                <button id="divide" onclick="appendOperator('/')">/</button>
-            </div>
-            <div class="button-row">
-                <button id="4" onclick="appendNumber(4)">4</button>
-                <button id="5" onclick="appendNumber(5)">5</button>
-                <button id="6" onclick="appendNumber(6)">6</button>
-                <button id="multiply" onclick="appendOperator('*')">*</button>
-            </div>
-            <div class="button-row">
-                <button id="1" onclick="appendNumber(1)">1</button>
-                <button id="2" onclick="appendNumber(2)">2</button>
-                <button id="3" onclick="appendNumber(3)">3</button>
-                <button id="subtract" onclick="appendOperator('-')">-</button>
-            </div>
-            <div class="button-row">
-                <button id="0" onclick="appendNumber(0)">0</button>
-                <button id="decimal" onclick="appendDecimal()">.</button>
-                <button id="equals" onclick="calculate()">=</button>
-                <button id="add" onclick="appendOperator('+')">+</button>
+            <div class="keys">
+                <button id="clear">C</button>
+                <button id="delete">DEL</button>
+                <button id="equals">=</button>
+                <button id="plus">+</button>
+                <button id="minus">-</button>
+                <button id="multiply">*</button>
+                <button id="divide">/</button>
+                <button id="zero">0</button>
+                <button id="one">1</button>
+                <button id="two">2</button>
+                <button id="three">3</button>
+                <button id="four">4</button>
+                <button id="five">5</button>
+                <button id="six">6</button>
+                <button id="seven">7</button>
+                <button id="eight">8</button>
+                <button id="nine">9</button>
+                <button id="decimal">.</button>
             </div>
         </div>
-    </div>
+    </main>
     <script src="app.js"></script>
 </body>
 </html>
