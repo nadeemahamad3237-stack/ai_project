@@ -1,4 +1,3 @@
-```javascript
 // Get the elements
 const resultInput = document.getElementById('result');
 const clearButton = document.getElementById('clear');
@@ -99,4 +98,3 @@ backspaceButton.addEventListener('click', () => {
     currentNumber = currentNumber.slice(0, -1);
     resultInput.value = currentNumber;
 });
-```

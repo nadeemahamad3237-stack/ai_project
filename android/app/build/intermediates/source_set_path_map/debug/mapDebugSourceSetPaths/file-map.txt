@@ -1,7 +1,0 @@
-com.aicreator.app-pngs-0 /data/data/com.termux/files/home/AI_Creator_v5/builder/projects/ai_project/android/app/build/generated/res/pngs/debug
-com.aicreator.app-resValues-1 /data/data/com.termux/files/home/AI_Creator_v5/builder/projects/ai_project/android/app/build/generated/res/resValues/debug
-com.aicreator.app-packageDebugResources-2 /data/data/com.termux/files/home/AI_Creator_v5/builder/projects/ai_project/android/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
-com.aicreator.app-packageDebugResources-3 /data/data/com.termux/files/home/AI_Creator_v5/builder/projects/ai_project/android/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
-com.aicreator.app-debug-4 /data/data/com.termux/files/home/AI_Creator_v5/builder/projects/ai_project/android/app/build/intermediates/merged_res/debug/mergeDebugResources
-com.aicreator.app-debug-5 /data/data/com.termux/files/home/AI_Creator_v5/builder/projects/ai_project/android/app/src/debug/res
-com.aicreator.app-main-6 /data/data/com.termux/files/home/AI_Creator_v5/builder/projects/ai_project/android/app/src/main/res
